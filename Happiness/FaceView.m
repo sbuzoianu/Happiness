@@ -18,29 +18,34 @@
     CGContextAddArc(context, p.x, p.y, radius, 0, 2*M_PI, 1); // defineste arcul de cerc de la 0 la 2PI = cerc
     CGContextStrokePath(context); // deseneaza linia pe arcul definit anterior
     UIGraphicsPopContext(); // inchidem zona grafica POP
-    
 }
 
-- (void)drawRect:(CGRect)rect {
-    
+- (void)drawRect:(CGRect)rect
+{
     CGContextRef context=UIGraphicsGetCurrentContext(); // aducem contextul grafic
     CGPoint midPoint;
-    midPoint.x=self.bounds.origin.x+self.bounds.size.width/2 ; //punctul de mijloc al FaceView-ului
-    midPoint.y=self.bounds.origin.y+self.bounds.size.height/2;
+    
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGFloat screenScale = [[UIScreen mainScreen] scale];
+    
+    midPoint.x=screenBounds.origin.x+screenBounds.size.width/2 ; //punctul de mijloc al FaceView-ului
+    midPoint.y=screenBounds.origin.y+screenBounds.size.height/2;
+    
+    CGSize screenSize = CGSizeMake(screenBounds.size.width * screenScale, screenBounds.size.height * screenScale);
+    NSLog(@"screenSize = %@", NSStringFromCGSize(screenSize));
+    
     NSLog(@"midpoint= %@", NSStringFromCGPoint(midPoint));
-    NSLog(@"bounds.origin= %@", NSStringFromCGPoint(self.bounds.origin));
-    NSLog(@"bounds.size= %@", NSStringFromCGSize(self.bounds.size));
+    NSLog(@"bounds.origin= %@", NSStringFromCGPoint(screenBounds.origin));
+    NSLog(@"bounds.size= %@", NSStringFromCGSize(screenBounds.size));
     NSLog(@"frame.origin= %@", NSStringFromCGPoint(self.frame.origin));
     NSLog(@"frame.size= %@", NSStringFromCGSize(self.frame.size));
     NSLog(@"center= %@", NSStringFromCGPoint(self.center));
-    NSLog(@"screen= %@", NSStringFromCGSize([[UIScreen mainScreen] bounds].size));
+    NSLog(@"screen= %@", NSStringFromCGSize(screenBounds.size));
     
-
-    
-    CGFloat size = self.bounds.size.width/2; // determinam care este latura mai mica - latimea sau inaltimea a.i. sa folosim acest SIZE ca si raza a cercului desenat
-    if (self.bounds.size.width > self.bounds.size.height)
+    CGFloat size = screenBounds.size.width/2; // determinam care este latura mai mica - latimea sau inaltimea a.i. sa folosim acest SIZE ca si raza a cercului desenat
+    if (screenBounds.size.width > screenBounds.size.height)
     {
-        size = self.bounds.size.height/2;
+        size = screenBounds.size.height/2;
     }
     size *=DEFAULT_SCALE;
     CGContextSetLineWidth(context, 5.0);
@@ -58,7 +63,7 @@
     [self drawCircleAtPoint:eyePoint withRadius:size * EYE_RADIUS inContext:context]; // desenam ochiul stang
     eyePoint.x += size * EYE_H * 2;
     [self drawCircleAtPoint:eyePoint withRadius:size * EYE_RADIUS inContext:context]; // desenam ochiul drept
-
+    
 #define MOUTH_H 0.45
 #define MOUTH_V 0.40
 #define MOUTH_SMILE 0.25
@@ -83,9 +88,9 @@
     CGContextMoveToPoint(context, mouthStart.x, mouthStart.y);
     CGContextAddCurveToPoint(context, mouthCP1.x, mouthCP2.y, mouthCP2.x, mouthCP2.y, mouthEnd.x, mouthEnd.y); // bezier curve
     CGContextStrokePath(context);
-
     
-
+    
+    
 }
 
 

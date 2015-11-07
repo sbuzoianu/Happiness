@@ -19,17 +19,25 @@
 @synthesize happiness=_happiness;
 @synthesize faceView=_faceView;
 
-
--(void) setHappiness:(int)happiness
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    _happiness=happiness;
-    [self.faceView setNeedsDisplay]; // atunci cand se modifica modelul - happiness se va redesena view-ul construit
-    
+    NSLog(@"\n\n---------------------------\nRotated\n---------------------------\n\n");
+    [self.faceView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    // fac resize la frame ( nu stiu dc nu face asta automat )
+    [self.faceView setNeedsDisplay]; // reapeleaza la schimbarea modelului
 }
 
+/*
+ -(void) setHappiness:(int)happiness
+ {
+ _happiness=happiness;
+ [self.faceView setNeedsDisplay]; // atunci cand se modifica modelul - happiness se va redesena view-ul construit
+ }
+ */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
+    [self.faceView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     return YES; // putem roti device-ul
 }
 
