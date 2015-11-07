@@ -9,8 +9,39 @@
 #import "FaceView.h"
 
 @implementation FaceView
+@synthesize scale=_scale;
 #define DEFAULT_SCALE 0.90 // factorul de multiplicare folosit la desenarea cercului
 
+-(CGFloat)scale{ //getter pentru scale - daca ajunge la 0 atunci va returna valoarea DEFAULT_SCALE
+    if (!_scale)
+    {
+        return DEFAULT_SCALE;
+    }
+    else return _scale;
+}
+
+- (void)setScale:(CGFloat)scale
+{
+    if(_scale!=scale)
+    {
+    _scale=scale;
+    [self setNeedsDisplay]; // la valoare noua de scale -> se va redesena
+    }
+}
+
+- (void) pinch:(UIPinchGestureRecognizer*)gesture
+//handler de gesture - ce va face atunci cand apare pinch pe ecran - trebuie actionat de cineva ca sa se produca - un recognizer
+{
+    if ((gesture.state==UIGestureRecognizerStateChanged)|| (gesture.state==UIGestureRecognizerStateEnded))
+    {
+        self.scale=self.scale*gesture.scale; //
+        gesture.scale=1; // resetam gesture.scale
+        NSLog(@"self scale= %f", self.scale);
+        NSLog(@"gesture scale= %f", gesture.scale);
+        
+
+    }
+}
 - (void) drawCircleAtPoint:(CGPoint)p withRadius:(CGFloat)radius inContext:(CGContextRef) context
 {
     UIGraphicsPushContext(context); // deschidem zona grafica PUSH
@@ -29,11 +60,12 @@
     
     midPoint.x=screenBounds.origin.x+screenBounds.size.width/2 ; //punctul de mijloc al FaceView-ului si al ecranului
     midPoint.y=screenBounds.origin.y+screenBounds.size.height/2;
-    NSLog(@"midpoint= %@", NSStringFromCGPoint(midPoint));
-    NSLog(@"bounds.origin= %@", NSStringFromCGPoint(self.bounds.origin));
-    NSLog(@"bounds.size= %@", NSStringFromCGSize(self.bounds.size));
-    NSLog(@"screen= %@", NSStringFromCGSize([[UIScreen mainScreen] bounds].size));
-    
+//    NSLog(@"midpoint= %@", NSStringFromCGPoint(midPoint));
+//    NSLog(@"bounds.origin= %@", NSStringFromCGPoint(self.bounds.origin));
+//    NSLog(@"bounds.size= %@", NSStringFromCGSize(self.bounds.size));
+//    NSLog(@"screen= %@", NSStringFromCGSize([[UIScreen mainScreen] bounds].size));
+//    NSLog(@"screen= %d", NSStringFromRange(gesture.scale);
+
 
     
     CGFloat size = screenBounds.size.width/2; // determinam care este latura mai mica - latimea sau inaltimea a.i. sa folosim acest SIZE ca si raza a cercului desenat
@@ -41,7 +73,7 @@
     {
         size = screenBounds.size.height/2;
     }
-    size *=DEFAULT_SCALE;
+    size *=self.scale;// modificarea dimensiunii la recognizer de pinch
     CGContextSetLineWidth(context, 5.0);
     [[UIColor blueColor] setStroke];
     [self drawCircleAtPoint:midPoint withRadius:size inContext:context];

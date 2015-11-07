@@ -10,6 +10,8 @@
 
 @interface FaceView : UIView
 
+@property (nonatomic) CGFloat scale;
 
+- (void) pinch:(UIGestureRecognizer *) gesture; // pinch gesture e facut public - oricine il poate folosi
 
 @end

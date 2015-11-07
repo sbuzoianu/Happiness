@@ -19,13 +19,18 @@
 @synthesize happiness=_happiness;
 @synthesize faceView=_faceView;
 
+-(void) setFaceView:(FaceView *)faceView
+{
+    _faceView=faceView; //setter
+    [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
+    // recognizer de pinch gesture
+}
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [self.faceView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     // fac resize la frame ( nu stiu dc nu face asta automat )
-    [self.faceView setNeedsDisplay]; // reapeleaza la schimbarea modelului
+    [self.faceView setNeedsDisplay]; // reapeleaza la modificarea orientarii
 }
-
 
 
 //- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
