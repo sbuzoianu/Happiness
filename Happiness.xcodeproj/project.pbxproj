@@ -13,6 +13,7 @@
 		0C69B2BC1BEB2E8F00339187 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C69B2BA1BEB2E8F00339187 /* Main.storyboard */; };
 		0C69B2BE1BEB2E8F00339187 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C69B2BD1BEB2E8F00339187 /* Assets.xcassets */; };
 		0C69B2C11BEB2E8F00339187 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C69B2BF1BEB2E8F00339187 /* LaunchScreen.storyboard */; };
+		0CEEFC171BEB787100F7DEE3 /* FaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CEEFC161BEB787100F7DEE3 /* FaceView.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		0C69B2BD1BEB2E8F00339187 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C69B2C01BEB2E8F00339187 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C69B2C21BEB2E8F00339187 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CEEFC151BEB787100F7DEE3 /* FaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceView.h; sourceTree = "<group>"; };
+		0CEEFC161BEB787100F7DEE3 /* FaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				0C69B2B51BEB2E8E00339187 /* AppDelegate.m */,
 				0C69B2B71BEB2E8E00339187 /* ViewController.h */,
 				0C69B2B81BEB2E8E00339187 /* ViewController.m */,
+				0CEEFC151BEB787100F7DEE3 /* FaceView.h */,
+				0CEEFC161BEB787100F7DEE3 /* FaceView.m */,
 				0C69B2BA1BEB2E8F00339187 /* Main.storyboard */,
 				0C69B2BD1BEB2E8F00339187 /* Assets.xcassets */,
 				0C69B2BF1BEB2E8F00339187 /* LaunchScreen.storyboard */,
@@ -153,6 +158,7 @@
 				0C69B2B91BEB2E8E00339187 /* ViewController.m in Sources */,
 				0C69B2B61BEB2E8E00339187 /* AppDelegate.m in Sources */,
 				0C69B2B31BEB2E8E00339187 /* main.m in Sources */,
+				0CEEFC171BEB787100F7DEE3 /* FaceView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +267,6 @@
 		0C69B2C61BEB2E8F00339187 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Happiness/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stefan.Happiness;
@@ -272,7 +277,6 @@
 		0C69B2C71BEB2E8F00339187 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Happiness/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Stefan.Happiness;
@@ -299,6 +303,7 @@
 				0C69B2C71BEB2E8F00339187 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

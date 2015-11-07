@@ -7,21 +7,30 @@
 //
 
 #import "ViewController.h"
+#import "FaceView.h"
 
 @interface ViewController ()
+@property (nonatomic, weak) IBOutlet FaceView *faceView;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+@synthesize happiness=_happiness;
+@synthesize faceView=_faceView;
+
+
+-(void) setHappiness:(int)happiness
+{
+    _happiness=happiness;
+    [self.faceView setNeedsDisplay]; // atunci cand se modifica modelul - happiness se va redesena view-ul construit
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES; // putem roti device-ul
 }
 
 @end

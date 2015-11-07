@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FaceView.h
 //  Happiness
 //
 //  Created by Stefan on 05/11/15.
@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface FaceView : UIView
 
-@property (nonatomic) int happiness;
+
 
 @end
-
