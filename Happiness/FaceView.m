@@ -25,22 +25,21 @@
     
     CGContextRef context=UIGraphicsGetCurrentContext(); // aducem contextul grafic
     CGPoint midPoint;
-    midPoint.x=self.bounds.origin.x+self.bounds.size.width/2 ; //punctul de mijloc al FaceView-ului
-    midPoint.y=self.bounds.origin.y+self.bounds.size.height/2;
+    CGRect screenBounds = [[UIScreen mainScreen] bounds]; //iau in considerare bounds-urile ecranului
+    
+    midPoint.x=screenBounds.origin.x+screenBounds.size.width/2 ; //punctul de mijloc al FaceView-ului si al ecranului
+    midPoint.y=screenBounds.origin.y+screenBounds.size.height/2;
     NSLog(@"midpoint= %@", NSStringFromCGPoint(midPoint));
     NSLog(@"bounds.origin= %@", NSStringFromCGPoint(self.bounds.origin));
     NSLog(@"bounds.size= %@", NSStringFromCGSize(self.bounds.size));
-    NSLog(@"frame.origin= %@", NSStringFromCGPoint(self.frame.origin));
-    NSLog(@"frame.size= %@", NSStringFromCGSize(self.frame.size));
-    NSLog(@"center= %@", NSStringFromCGPoint(self.center));
     NSLog(@"screen= %@", NSStringFromCGSize([[UIScreen mainScreen] bounds].size));
     
 
     
-    CGFloat size = self.bounds.size.width/2; // determinam care este latura mai mica - latimea sau inaltimea a.i. sa folosim acest SIZE ca si raza a cercului desenat
-    if (self.bounds.size.width > self.bounds.size.height)
+    CGFloat size = screenBounds.size.width/2; // determinam care este latura mai mica - latimea sau inaltimea a.i. sa folosim acest SIZE ca si raza a cercului desenat
+    if (screenBounds.size.width > screenBounds.size.height)
     {
-        size = self.bounds.size.height/2;
+        size = screenBounds.size.height/2;
     }
     size *=DEFAULT_SCALE;
     CGContextSetLineWidth(context, 5.0);
@@ -79,11 +78,12 @@
     mouthCP1.y += smileOffset;
     mouthCP2.y += smileOffset;
     
+    UIGraphicsPushContext(context); // deschidem zona grafica PUSH
     CGContextBeginPath(context);
     CGContextMoveToPoint(context, mouthStart.x, mouthStart.y);
     CGContextAddCurveToPoint(context, mouthCP1.x, mouthCP2.y, mouthCP2.x, mouthCP2.y, mouthEnd.x, mouthEnd.y); // bezier curve
     CGContextStrokePath(context);
-
+    UIGraphicsPopContext();
     
 
 }

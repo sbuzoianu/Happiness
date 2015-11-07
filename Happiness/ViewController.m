@@ -19,6 +19,29 @@
 @synthesize happiness=_happiness;
 @synthesize faceView=_faceView;
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.faceView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    // fac resize la frame ( nu stiu dc nu face asta automat )
+    [self.faceView setNeedsDisplay]; // reapeleaza la schimbarea modelului
+}
+
+
+
+//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+//{
+//    // Define the new screen size we are about to transition to
+//    CGSize windowSize;
+//    windowSize= size;
+//    
+//    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context){
+//        [self.faceView setFrame:CGRectMake(0, 0, size.width, size.height)];
+//    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context){
+//    }];
+//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//}
+
+
 
 -(void) setHappiness:(int)happiness
 {
@@ -28,9 +51,5 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return YES; // putem roti device-ul
-}
 
 @end
