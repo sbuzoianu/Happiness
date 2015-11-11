@@ -10,6 +10,8 @@
 
 @implementation FaceView
 @synthesize scale=_scale;
+@synthesize dataSource = _dataSource;
+
 #define DEFAULT_SCALE 0.90 // factorul de multiplicare folosit la desenarea cercului
 
 -(CGFloat)scale{ //getter pentru scale - daca ajunge la 0 atunci va returna valoarea DEFAULT_SCALE
@@ -104,7 +106,10 @@
     CGPoint mouthCP2 = mouthEnd;
     mouthCP2.x -= MOUTH_H * size * 2/3;
     
-    float smile = 1.0; // this should be delegated! it's our View's data!
+    float smile = [self.dataSource smileForFaceView:self]; // valoarea zambetului [-1,1] - valoarea zambetului va fi furnizata prin dataSource
+    if (smile < -1) smile = -1;
+    if (smile > 1) smile = 1;
+
     
     CGFloat smileOffset = MOUTH_SMILE * size * smile;
     mouthCP1.y += smileOffset;
